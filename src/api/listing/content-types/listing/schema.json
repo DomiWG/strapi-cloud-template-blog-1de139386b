@@ -90,7 +90,7 @@
     },
     "price": {
       "type": "biginteger",
-      "required": true
+      "required": false
     }
   }
 }
