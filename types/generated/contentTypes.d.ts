@@ -523,6 +523,7 @@ export interface ApiListingListing extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    features: Schema.Attribute.Component<'property.feature', true>;
     floor_plan: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
     images: Schema.Attribute.Media<'images' | 'files' | 'videos', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;

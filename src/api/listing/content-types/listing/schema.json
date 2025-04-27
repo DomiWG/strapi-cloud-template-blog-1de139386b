@@ -91,6 +91,11 @@
     "price": {
       "type": "biginteger",
       "required": false
+    },
+    "features": {
+      "type": "component",
+      "repeatable": true,
+      "component": "property.feature"
     }
   }
 }
