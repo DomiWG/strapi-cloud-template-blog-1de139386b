@@ -455,6 +455,7 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     email: Schema.Attribute.String;
+    listings: Schema.Attribute.Relation<'oneToMany', 'api::listing.listing'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -462,6 +463,7 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
+    phone: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -504,6 +506,7 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
 export interface ApiListingListing extends Struct.CollectionTypeSchema {
   collectionName: 'listings';
   info: {
+    description: '';
     displayName: 'Listing';
     pluralName: 'listings';
     singularName: 'listing';
@@ -512,7 +515,7 @@ export interface ApiListingListing extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    author: Schema.Attribute.Relation<'oneToOne', 'api::author.author'>;
+    agent: Schema.Attribute.Relation<'manyToOne', 'api::author.author'>;
     blocks: Schema.Attribute.Blocks & Schema.Attribute.Required;
     city: Schema.Attribute.String & Schema.Attribute.Required;
     cover: Schema.Attribute.Media<'images' | 'files'> &
@@ -528,8 +531,12 @@ export interface ApiListingListing extends Struct.CollectionTypeSchema {
       'api::listing.listing'
     > &
       Schema.Attribute.Private;
+    price: Schema.Attribute.BigInteger & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    sold: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     transaction: Schema.Attribute.Enumeration<['Wynajem', 'Sprzeda\u017C']> &
       Schema.Attribute.Required &

@@ -4,20 +4,21 @@
   "info": {
     "singularName": "listing",
     "pluralName": "listings",
-    "displayName": "Listing"
+    "displayName": "Listing",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "attributes": {
     "cover": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files"
-      ],
-      "type": "media",
-      "multiple": false,
-      "required": true
+      ]
     },
     "city": {
       "type": "string",
@@ -28,26 +29,28 @@
       "required": true
     },
     "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "title": {
       "type": "string",
       "required": true
     },
     "floor_plan": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "type": {
       "type": "enumeration",
@@ -69,14 +72,24 @@
       "required": true,
       "default": "Sprzedaż"
     },
-    "author": {
+    "agent": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::author.author"
+      "relation": "manyToOne",
+      "target": "api::author.author",
+      "inversedBy": "listings"
     },
     "slug": {
       "type": "uid",
       "targetField": "title",
+      "required": true
+    },
+    "sold": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "price": {
+      "type": "biginteger",
       "required": true
     }
   }
